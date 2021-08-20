@@ -9,15 +9,19 @@ const notificationReducer = (state = initialState, action) => {
       return state;
   }
 };
-export const setNotification = msg => {
-  return {
-    type: "SET_FILTER",
-    data: msg,
+export const setNotification = (msg, time) => {
+  return async dispatch => {
+    dispatch({
+      type: "SET_FILTER",
+      data: msg,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: "RESET_FILTER",
+      });
+    }, time * 1000);
   };
 };
-export const reSetNotification = () => {
-  return {
-    type: "RESET_FILTER",
-  };
-};
+
 export default notificationReducer;
